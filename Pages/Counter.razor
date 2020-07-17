@@ -1,9 +1,17 @@
 ﻿@page "/counter"
 
 <h1>Calculator</h1>
-
+<input />
+<br />
+<input />
+<select>
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+    <option>%</option>
+</select>
 <p>Result: @currentCount</p>
-
 <button class="btn btn-primary" @onclick="IncrementCount">Calculate</button>
 
 @code {
