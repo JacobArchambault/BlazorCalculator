@@ -1,0 +1,10 @@
+To test this app, I performed each operation from the dropdown list with the following combinations:
+	a nonnumeric input and a numeric input.
+	two non-zero numeric inputs, e.g. -20 and 6.22
+	A numeric input and as the second input.
+
+Setting the HTML type of the input elements to 'number' restricts the range of characters the user may type into the input textboxes. But non-numeric inputs are still possible, e.g. eee or 1.454..234. When the user types a non-numeric input into either textbox, he receives a warning message that both inputs must be numeric.
+
+Typing in two numbers and selecting an operation from the dropdown list prints the correct result immediately under the second textbox.
+
+Typing in zero as the second input gives a correct result for all non-division operations. For division, the program throws a divide-by-zero exception is thrown and the user is prompted with the text 'Cannot divide by zero'.
