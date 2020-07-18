@@ -1,0 +1,69 @@
+﻿@page "/calculator"
+
+<h1>Calculator</h1>
+<input type="number" required @bind="number1"/>
+<br />
+<input type="number" required @bind="number2"/>
+<select @bind="selectedOperator">
+    <option>+</option>
+    <option>-</option>
+    <option>*</option>
+    <option>/</option>
+    <option>%</option>
+</select>
+<p>@result</p>
+<button id="calculate-button" class="btn btn-primary" @onclick="DisplayCalculation">Calculate</button>
+
+@code {
+    string number1;
+    string number2;
+    char selectedOperator = '+';
+    string result;
+
+    private void DisplayCalculation()
+    {
+        try
+        {
+            // Ensure the values passed in by the user can be parsed as decimals
+            if (decimal.TryParse(number1, out decimal input1)
+                && decimal.TryParse(number2, out decimal input2))
+            {
+                // If they can, print the result of the binary operation passed in on the result label in string format...
+                switch (selectedOperator)
+                {
+                    case '+':
+                        result = (input1 + input2).ToString();
+                        break;
+                    case '-':
+                        result = (input1 - input2).ToString();
+                        break;
+                    case '*':
+                        result = (input1 * input2).ToString();
+                        break;
+                    case '/':
+                        result = (input1 / input2).ToString();
+                        break;
+                    case '%':
+                        result = (input1 % input2).ToString();
+                        break;
+                }
+            }
+            else
+            {
+                // Otherwise, give the reader a warning message
+                result = "Both values must be numeric.";
+            }
+
+        }
+        // Ensure that user receives an error message on attempting to divide by zero.
+        catch (DivideByZeroException)
+        {
+            result = "Cannot divide by zero";
+        }
+    }
+
+    private decimal Calculate(decimal a, decimal b, Func<decimal, decimal, decimal> binaryOperation)
+    {
+        return binaryOperation(a, b);
+    }
+}
