@@ -1,9 +1,9 @@
 ﻿@page "/counter"
 
 <h1>Calculator</h1>
-<input />
+<input id="number1"/>
 <br />
-<input />
+<input id="number2"/>
 <select>
     <option>+</option>
     <option>-</option>
@@ -11,14 +11,18 @@
     <option>/</option>
     <option>%</option>
 </select>
-<p>Result: @currentCount</p>
-<button class="btn btn-primary" @onclick="IncrementCount">Calculate</button>
+<p id="result">@result</p>
+<button id="calculate-button" class="btn btn-primary" @onclick="DisplayCalculation">Calculate</button>
 
 @code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
+    string result;
+    private void DisplayCalculation()
     {
-        currentCount++;
+        result = (Calculate(2, 3, (a, b) => a+b)).ToString();
+    }
+
+    private decimal Calculate(decimal a, decimal b, Func<decimal, decimal, decimal> binaryOperation)
+    {
+        return binaryOperation(a, b);
     }
 }
