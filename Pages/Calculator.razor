@@ -1,9 +1,12 @@
 ﻿@page "/calculator"
 
 <h1>Calculator</h1>
+@* Adding the number type restricts the user to inputs one would find in numbers *@
+@* The @bind tag binds the value of the input value to a field named 'number1' in the @code section below *@
 <input type="number" required @bind="number1"/>
 <br />
 <input type="number" required @bind="number2"/>
+@* Create a dropdown list and bind the selection to the selectedOperator field. *@
 <select @bind="selectedOperator">
     <option>+</option>
     <option>-</option>
@@ -11,8 +14,10 @@
     <option>/</option>
     <option>%</option>
 </select>
+@* @result ensures that the p element has as its text the content of the result variable *@
 <p>@result</p>
-<button id="calculate-button" class="btn btn-primary" @onclick="DisplayCalculation">Calculate</button>
+@* Execute the DisplayCalculation method on button click *@
+<button class="btn btn-primary" @onclick="DisplayCalculation">Calculate</button>
 
 @code {
     string number1;
@@ -60,10 +65,5 @@
         {
             result = "Cannot divide by zero";
         }
-    }
-
-    private decimal Calculate(decimal a, decimal b, Func<decimal, decimal, decimal> binaryOperation)
-    {
-        return binaryOperation(a, b);
     }
 }
